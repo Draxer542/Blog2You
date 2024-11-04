@@ -11,7 +11,6 @@ from sqlalchemy import Integer, String, Text
 from functools import wraps
 from werkzeug.security import generate_password_hash, check_password_hash
 from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm
-# Optional: add contact me email functionality (Day 60)
 import smtplib
 
 # from dotenv import load_dotenv
@@ -29,7 +28,6 @@ pip3 install -r requirements.txt
 This will install the packages from the requirements.txt for this project.
 '''
 
-load_dotenv()
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get("FLASK_SECRET_KEY")
 ckeditor = CKEditor(app)
@@ -38,7 +36,6 @@ Bootstrap5(app)
 # Configure Flask-Login
 login_manager = LoginManager()
 login_manager.init_app(app)
-# current_year = dt.now().year
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -272,14 +269,6 @@ def delete_post(post_id):
 def about():
     return render_template("about.html", current_user=current_user)
 
-
-# @app.route("/contact", methods=["GET", "POST"])
-# def contact():
-#     return render_template("contact.html", current_user=current_user)
-
-# Optional: You can include the email sending code from Day 60:
-# DON'T put your email and password here directly! The code will be visible when you upload to Github.
-# Use environment variables instead (Day 35)
 
 MAIL_ADDRESS = os.environ.get("EMAIL_KEY")
 MAIL_APP_PW = os.environ.get("PASSWORD_KEY")
