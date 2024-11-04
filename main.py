@@ -14,6 +14,7 @@ from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm
 # Optional: add contact me email functionality (Day 60)
 import smtplib
 
+# from dotenv import load_dotenv
 
 '''
 Make sure the required packages are installed: 
