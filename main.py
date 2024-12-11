@@ -277,17 +277,17 @@ MAIL_APP_PW = os.environ.get("PASSWORD_KEY")
 def contact():
     if request.method == "POST":
         data = request.form
-        send_email(data["name"], data["email"], data["phone"], data["message"])
+        send_email(data["name"],os.environ.get("TO_EMAIL"), data["email"], data["phone"], data["message"])
         return render_template("contact.html", msg_sent=True)
     return render_template("contact.html", msg_sent=False)
 
 
-def send_email(name, email, phone, message):
+def send_email(name, to_email, email, phone, message):
     email_message = f"Subject:New Message\n\nName: {name}\nEmail: {email}\nPhone: {phone}\nMessage:{message}"
     with smtplib.SMTP("smtp.gmail.com") as connection:
         connection.starttls()
-        connection.login(MAIL_ADDRESS, MAIL_APP_PW)
-        connection.sendmail(MAIL_ADDRESS, MAIL_APP_PW, email_message)
+        connection.login(os.environ.get("EMAIL_KEY"), os.environ.get("PASSWORD_KEY"))
+        connection.sendmail(os.environ.get("EMAIL_KEY"), to_email, email_message)
 
 @app.context_processor
 def inject_year():
